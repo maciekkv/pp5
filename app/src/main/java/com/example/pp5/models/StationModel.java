@@ -9,9 +9,6 @@ public class StationModel {
     String ON;
     String icon;
 
-    public StationModel() {
-    }
-
     public StationModel(String address, String LPG, String PB95, String PB98, String ON, String icon) {
         this.address = address;
         this.LPG = LPG;

@@ -24,6 +24,7 @@ import com.example.pp5.adapters.StationListAdapter;
 import com.example.pp5.models.StationModel;
 import com.example.pp5.viewmodels.StationListViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
@@ -32,6 +33,7 @@ public class HomeFragment extends Fragment {
     TextView noresult;
     ProgressBar progressBar;
     List<StationModel> stationList;
+
     StationListViewModel listViewModel;
     StationListAdapter adapter;
     SwipeRefreshLayout swipeRefreshLayout;
@@ -42,6 +44,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        stationList = new ArrayList<>();
 
         adapter = new StationListAdapter(stationList);
         //recview.setAdapter(adapter);
