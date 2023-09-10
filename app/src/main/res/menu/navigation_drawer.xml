@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:id="@+id/nav_main"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Main"/>
+    <item android:title="Extra functions">
+        <menu>
+            <item
+        android:id="@+id/nav_sync"
+        android:icon="@drawable/ic_baseline_sync_24"
+        android:title="Sync"/>
+            <item
+        android:id="@+id/nav_stats"
+        android:icon="@drawable/ic_baseline_query_stats_24"
+        android:title="Statistic"/>
+            <item
+        android:id="@+id/nav_button"
+        android:title="Navigation button"
+        android:icon="@drawable/ic_baseline_edit_attributes_24"/>
+        </menu>
+    </item>
+    <item android:title="About app">
+        <menu>
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_baseline_info_24"
+                android:title="About"/>
+        </menu>
+    </item>
+</menu>
