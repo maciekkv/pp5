@@ -3,10 +3,13 @@ package com.example.pp5;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,7 +24,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity  {
 
     BottomNavigationView bottomNav;
     DrawerLayout drawerLayout;
@@ -34,16 +37,48 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         drawerLayout = findViewById(R.id.drawerLayout);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         navigationView = findViewById(R.id.navigation_view);
 
-        toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.start, R.string.close);
-
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        navigationView.setNavigationItemSelectedListener(this);
 
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.nav_about:
+                        Log.d("About", "About is clicked");
+                        Toast.makeText(MainActivity.this,"About app",Toast.LENGTH_LONG).show();
+                        break;
+                    case R.id.nav_stats:
+                        Log.d("Stats", "Stats is clicked");
+                        //Toast.makeText(MainActivity.this,"Statistic",Toast.LENGTH_LONG).show();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new FavouriteFragment()).commit();
+                        break;
+                    case R.id.nav_sync:
+                        Log.d("Sync", "Sync is clicked");
+                        Toast.makeText(getApplicationContext(),"Sync up to date",Toast.LENGTH_LONG).show();
+                        break;
+                    case R.id.nav_button:
+                        Log.d("Button", "Button is clicked");
+                        Toast.makeText(getApplicationContext(),"Enable button",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.main:
+                        Log.d("Main", "Main is clicked");
+                        Toast.makeText(getApplicationContext(),"Main Home",Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        return true;
+                }
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+                //return onNavigationItemSelected(item);
+            }
+        });
 
         bottomNav = findViewById(R.id.bottomNavigationView);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
@@ -58,12 +93,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             switch (item.getItemId()) {
                 case R.id.home:
+                    Log.d("HomeFragment", "Home Fragment is on");
                     selectedFragment = new HomeFragment();
                     break;
                 case R.id.search:
+                    Log.d("SearchFragment", "Searcg Fragment is on");
                     selectedFragment = new SearchFragment();
                     break;
                 case R.id.favourite:
+                    Log.d("FavouriteFragment", "Favourite Fragment is on");
                     selectedFragment = new FavouriteFragment();
                     break;
             }
@@ -73,34 +111,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     };
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.nav_about:
-                Toast.makeText(MainActivity.this,"About app",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.nav_stats:
-                Toast.makeText(MainActivity.this,"Statistic",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.nav_sync:
-                Toast.makeText(MainActivity.this,"Sync up to date",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.nav_button:
-                Toast.makeText(MainActivity.this,"Enable button",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.nav_main:
-                Toast.makeText(MainActivity.this,"Main Home",Toast.LENGTH_SHORT).show();
-                break;
-
-        }
-        return true;
-    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(toggle.onOptionsItemSelected(item))
+        if(toggle.onOptionsItemSelected(item)) {
             return true;
-        return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
-}
 
+}
