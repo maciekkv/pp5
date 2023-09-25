@@ -1,7 +1,16 @@
 package com.example.pp5.models;
 
-public class StationModel {
+import android.os.Parcel;
+import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
+import java.util.Comparator;
+
+public class StationModel   {
+    //model class - select data which should be fetched from api
+
+    //declare variables
     String address;
     String LPG;
     String PB95;
@@ -9,6 +18,7 @@ public class StationModel {
     String ON;
     String icon;
 
+    //constructor
     public StationModel(String address, String LPG, String PB95, String PB98, String ON, String icon) {
         this.address = address;
         this.LPG = LPG;
@@ -18,6 +28,22 @@ public class StationModel {
         this.icon = icon;
     }
 
+    protected StationModel(Parcel in) {
+        address = in.readString();
+        LPG = in.readString();
+        PB95 = in.readString();
+        PB98 = in.readString();
+        ON = in.readString();
+        icon = in.readString();
+    }
+
+
+
+    public StationModel() {
+
+    }
+
+    //getters
     public String getAddress() {
         return address;
     }
@@ -41,4 +67,37 @@ public class StationModel {
     public String getIcon() {
         return icon;
     }
+
+
+
+    //sorting
+    public static Comparator<StationModel> lpgComparator = new Comparator<StationModel>() {
+        @Override
+        public int compare(StationModel o1, StationModel o2) {
+            return o1.getLPG().compareTo(o2.getLPG());
+        }
+    };
+
+    public static Comparator<StationModel> pb95Comparator = new Comparator<StationModel>() {
+        @Override
+        public int compare(StationModel o1, StationModel o2) {
+            return o1.getPB95().compareTo(o2.getPB95());
+        }
+    };
+
+    public static Comparator<StationModel> pb98Comparator = new Comparator<StationModel>() {
+        @Override
+        public int compare(StationModel o1, StationModel o2) {
+            return o1.getPB98().compareTo(o2.getPB98());
+        }
+    };
+
+    public static Comparator<StationModel> onComparator = new Comparator<StationModel>() {
+        @Override
+        public int compare(StationModel o1, StationModel o2) {
+            return o1.getON().compareTo(o2.getON());
+        }
+    };
+
+
 }

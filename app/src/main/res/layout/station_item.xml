@@ -74,6 +74,7 @@
 
         <Button
             android:id="@+id/nav_btn"
+            android:onClick="onNavButtonClicked"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginEnd="72dp"
@@ -93,12 +94,10 @@
             app:layout_constraintTop_toBottomOf="@+id/nav_btn"
             app:layout_constraintVertical_bias="0.0" />
 
-        <ToggleButton
-            android:id="@+id/tglBtn"
+        <Button
+            android:id="@+id/favBtn"
             android:onClick="onDefaultToggleClick"
             android:layout_width="38dp"
-            android:textOn=""
-            android:textOff=""
             android:background="@drawable/toggle_selector"
             android:layout_height="36dp"
             android:layout_marginTop="32dp"
@@ -115,7 +114,7 @@
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tglBtn"
+            app:layout_constraintTop_toBottomOf="@+id/favBtn"
             app:layout_constraintVertical_bias="0.0" />
 
 

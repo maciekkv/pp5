@@ -8,11 +8,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -31,16 +34,19 @@ public class MainActivity extends AppCompatActivity  {
     ActionBarDrawerToggle toggle;
     NavigationView navigationView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         drawerLayout = findViewById(R.id.drawerLayout);
+
+        //to display system toolbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         navigationView = findViewById(R.id.navigation_view);
-
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
@@ -52,7 +58,7 @@ public class MainActivity extends AppCompatActivity  {
                 switch (item.getItemId()){
                     case R.id.nav_about:
                         Log.d("About", "About is clicked");
-                        Toast.makeText(MainActivity.this,"About app",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"About app",Toast.LENGTH_LONG).show();
                         break;
                     case R.id.nav_stats:
                         Log.d("Stats", "Stats is clicked");
@@ -76,7 +82,6 @@ public class MainActivity extends AppCompatActivity  {
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
-                //return onNavigationItemSelected(item);
             }
         });
 
@@ -85,6 +90,8 @@ public class MainActivity extends AppCompatActivity  {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new HomeFragment()).commit();
     }
+
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -112,6 +119,7 @@ public class MainActivity extends AppCompatActivity  {
     };
 
 
+    //Enable navigation_drawer button on toolbar
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(toggle.onOptionsItemSelected(item)) {

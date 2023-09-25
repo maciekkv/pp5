@@ -7,8 +7,9 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.pp5.apis.ApiServices;
 import com.example.pp5.models.StationModel;
-import com.example.pp5.repositories.ApiClient;
+import com.example.pp5.repositories.StationRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -27,8 +28,11 @@ public class StationListViewModel extends ViewModel {
         return stationList;
     }
 
+
+
+    //make the connection
     public void makeApiCall(){
-        ApiServices apiServices = ApiClient.getRetrofitClient().create(ApiServices.class);
+        ApiServices apiServices = StationRepository.getRetrofitClient().create(ApiServices.class);
         Call<List<StationModel>> call = apiServices.getStationList();
         call.enqueue(new Callback<List<StationModel>>() {
             @Override
@@ -43,4 +47,5 @@ public class StationListViewModel extends ViewModel {
             }
         });
     }
+
 }
