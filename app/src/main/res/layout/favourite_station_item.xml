@@ -98,8 +98,7 @@
             android:id="@+id/favBtn"
             android:onClick="onDefaultToggleClick"
             android:layout_width="38dp"
-
-            android:background="@drawable/toggle_selector"
+            android:background="@drawable/ic_baseline_favorite_24"
             android:layout_height="36dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="9dp"

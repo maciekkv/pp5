@@ -51,4 +51,7 @@ dependencies {
 
     //swiperefreshlayout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01"
+
+    //swipe
+    implementation 'it.xabaras.android:recyclerview-swipedecorator:1.4'
 }

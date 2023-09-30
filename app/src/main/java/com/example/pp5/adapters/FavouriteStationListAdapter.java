@@ -1,6 +1,5 @@
 package com.example.pp5.adapters;
 
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,18 +23,19 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.myViewHolder> implements Filterable{
+public class FavouriteStationListAdapter  extends RecyclerView.Adapter<FavouriteStationListAdapter.myViewHolder> {
 
     List<StationModel> stationList;
 
     List<StationModel> stationListFull;
+    List<StationModel> favouriteStations;
+
     Context context;
 
     //constructor
-    public StationListAdapter(Context context,List<StationModel> stationList) {
+    public FavouriteStationListAdapter(Context context,List<StationModel> stationList) {
         this.context = context;
         this.stationList = stationList;
         stationListFull = new ArrayList<>(stationList);
@@ -52,14 +51,14 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.
     //adapter's methods
     @NonNull
     @Override
-    public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FavouriteStationListAdapter.myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //create station in recycler view
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.station_item,parent,false);
-        return new myViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.favourite_station_item,parent,false);
+        return new FavouriteStationListAdapter.myViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FavouriteStationListAdapter.myViewHolder holder, int position) {
         //put fetched data into holders
         holder.txt1.setText(stationList.get(position).getAddress());
         holder.txt2.setText("LPG: "+stationList.get(position).getLPG());
@@ -81,10 +80,7 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.
 
     }
 
-    @Override
-    public Filter getFilter() {
-        return stationFilter;
-    }
+
 
     private Filter stationFilter = new Filter() {
         //background
@@ -144,12 +140,14 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.
                     int position = getAdapterPosition();
                     StationModel station = stationList.get(position);
 
-                    station.setFavourite(true);
-                    favBtn.setBackgroundResource(R.drawable.ic_baseline_favorite_24_2);
-                    Toast.makeText(context,"Added to favourite",Toast.LENGTH_SHORT).show();
-                    saveToFavourites(station);
-                }
+                    //remove from favourites
+                    removeFromFavourites(station);
+                    stationList.remove(position);
+                    notifyItemRemoved(position);
+                    Toast.makeText(context, "Removed from favourites", Toast.LENGTH_SHORT).show();
+                    saveToFavourites();
 
+                }
             });
 
         }
@@ -157,21 +155,44 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.
 
     }
 
-    //save station to favourite
-    private void saveToFavourites(StationModel station){
+    private void saveToFavourites(){
         SharedPreferences sharedPreferences = context.getSharedPreferences("shared preferences",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
 
         List<StationModel> favouriteStations = getFavouriteStations();
-        favouriteStations.add(station);
+        favouriteStations.clear();
+        favouriteStations.addAll(stationList);
 
         String json = gson.toJson(favouriteStations);
         editor.putString("station",json);
         editor.apply();
     }
 
-    //list to store favourite stations
+
+    //method to remove from favourites
+    private void removeFromFavourites(StationModel station){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("shared preferences",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+
+        List<StationModel> favouriteStations = getFavouriteStations();
+        if (favouriteStations.contains(station)) {
+            favouriteStations.remove(station);
+
+            notifyDataSetChanged();
+            updateStationList(favouriteStations);
+
+            String json = gson.toJson(favouriteStations);
+            editor.putString("station", json);
+            editor.apply();
+
+        }
+
+    }
+
+
+
     public List<StationModel> getFavouriteStations(){
         SharedPreferences sharedPreferences = context.getSharedPreferences("shared preferences",Context.MODE_PRIVATE);
         Gson gson = new Gson();
@@ -184,6 +205,5 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.
         }
         return favouriteStations;
     }
-
 
 }

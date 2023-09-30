@@ -17,6 +17,7 @@ public class StationModel   {
     String PB98;
     String ON;
     String icon;
+    boolean isFavourite;
 
     //constructor
     public StationModel(String address, String LPG, String PB95, String PB98, String ON, String icon) {
@@ -26,16 +27,10 @@ public class StationModel   {
         this.PB98 = PB98;
         this.ON = ON;
         this.icon = icon;
+        this.isFavourite = false;
     }
 
-    protected StationModel(Parcel in) {
-        address = in.readString();
-        LPG = in.readString();
-        PB95 = in.readString();
-        PB98 = in.readString();
-        ON = in.readString();
-        icon = in.readString();
-    }
+
 
 
 
@@ -99,5 +94,14 @@ public class StationModel   {
         }
     };
 
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    // Setter dla pola isFavourite
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
+    }
 
 }

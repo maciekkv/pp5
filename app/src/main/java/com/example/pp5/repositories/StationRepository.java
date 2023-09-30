@@ -10,7 +10,7 @@ public class StationRepository {
     //declare variables
     //public static String baseurl = "https://petrol-stations.onrender.com/";
     public static String baseurl = "https://maciekkv.pythonanywhere.com/";
-    //public static String baseurl = "https://cc2f-46-204-108-123.ngrok-free.app/";
+    //public static String baseurl = "https://4716-46-204-105-97.ngrok-free.app/";
 
     private static Retrofit retrofit;
 

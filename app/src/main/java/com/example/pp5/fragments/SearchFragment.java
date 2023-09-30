@@ -53,7 +53,7 @@ public class SearchFragment extends Fragment {
 
         stationList = new ArrayList<>();
 
-        adapter = new StationListAdapter(stationList);
+        adapter = new StationListAdapter(requireContext(),stationList);
 
         listViewModel = new ViewModelProvider(this).get(StationListViewModel.class);
         listViewModel.getStationListObserver().observe(this, new Observer<List<StationModel>>() {

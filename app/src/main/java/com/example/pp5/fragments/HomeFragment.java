@@ -53,7 +53,7 @@ public class HomeFragment extends Fragment {
 
         stationList = new ArrayList<>();
 
-        adapter = new StationListAdapter(stationList);
+        adapter = new StationListAdapter(requireContext(),stationList);
 
 
 
@@ -95,6 +95,7 @@ public class HomeFragment extends Fragment {
 
         recview.setLayoutManager(new LinearLayoutManager(getContext()));
         recview.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
+
 
         recview.setAdapter(adapter);
 
