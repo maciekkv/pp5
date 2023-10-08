@@ -32,10 +32,13 @@ import com.example.pp5.adapters.StationListAdapter;
 import com.example.pp5.models.StationModel;
 import com.example.pp5.viewmodels.StationListViewModel;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
@@ -62,6 +65,7 @@ public class FavouriteFragment extends Fragment  {
         listViewModel = new ViewModelProvider(this).get(StationListViewModel.class);
         favouriteStations = adapter.getFavouriteStations();
 
+
     }
 
 
@@ -79,6 +83,7 @@ public class FavouriteFragment extends Fragment  {
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recview);
+
 
 
 
@@ -142,5 +147,6 @@ public class FavouriteFragment extends Fragment  {
         editor.putString("station", json);
         editor.apply();
     }
+
 
 }

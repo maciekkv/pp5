@@ -45,6 +45,8 @@ public class HomeFragment extends Fragment {
     StationListAdapter adapter;
     SwipeRefreshLayout swipeRefreshLayout;
 
+    Button button;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -108,6 +110,8 @@ public class HomeFragment extends Fragment {
                 swipeUpdate();
             }
         });
+
+        //button = view.findViewById(R.id.fab);
 
 
         return view;

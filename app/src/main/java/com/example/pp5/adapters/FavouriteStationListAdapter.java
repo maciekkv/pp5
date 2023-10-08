@@ -1,7 +1,9 @@
 package com.example.pp5.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -132,6 +134,25 @@ public class FavouriteStationListAdapter  extends RecyclerView.Adapter<Favourite
             txt5 = itemView.findViewById(R.id.on);
             favBtn = itemView.findViewById(R.id.favBtn);
             navBtn = itemView.findViewById(R.id.nav_btn);
+            navBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context.getApplicationContext(), "Favourite navigation button clicked",Toast.LENGTH_SHORT).show();
+
+                    StationModel.GeoCoordinates coordinates = stationList.get(getAdapterPosition()).getGeoCoordinates();
+                    if(coordinates != null){
+                        String geoUri = "google.navigation:q=" + coordinates.getLatitude() + "," + coordinates.getLongitude() + "&mode=1";
+
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUri));
+                        intent.setPackage("com.google.android.apps.maps");
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
+                    }else {
+                        Toast.makeText(context,"Coordinates not found",Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
 
 
             favBtn.setOnClickListener(new View.OnClickListener() {

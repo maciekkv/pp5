@@ -16,7 +16,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.SearchView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.pp5.fragments.FavouriteFragment;
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity  {
     NavigationView navigationView;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,7 @@ public class MainActivity extends AppCompatActivity  {
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
 
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -72,6 +76,7 @@ public class MainActivity extends AppCompatActivity  {
                     case R.id.nav_button:
                         Log.d("Button", "Button is clicked");
                         Toast.makeText(getApplicationContext(),"Enable button",Toast.LENGTH_SHORT).show();
+
                         break;
                     case R.id.main:
                         Log.d("Main", "Main is clicked");
@@ -84,6 +89,10 @@ public class MainActivity extends AppCompatActivity  {
                 return true;
             }
         });
+
+
+
+
 
         bottomNav = findViewById(R.id.bottomNavigationView);
         bottomNav.setOnNavigationItemSelectedListener(navListener);

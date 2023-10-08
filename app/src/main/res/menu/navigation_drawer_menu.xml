@@ -21,7 +21,9 @@
             <item
         android:id="@+id/nav_button"
         android:title="Navigation button"
-        android:icon="@drawable/ic_baseline_edit_attributes_24" />
+                android:icon="@drawable/ic_baseline_edit_attributes_24"
+
+                />
         </menu>
     </item>
     <item android:title="About app">

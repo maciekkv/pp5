@@ -2,8 +2,9 @@ package com.example.pp5.adapters;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,6 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.myViewHolder> implements Filterable{
@@ -35,8 +35,10 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.
     List<StationModel> stationListFull;
     Context context;
 
+
+
     //constructor
-    public StationListAdapter(Context context,List<StationModel> stationList) {
+    public StationListAdapter(Context context, List<StationModel> stationList) {
         this.context = context;
         this.stationList = stationList;
         stationListFull = new ArrayList<>(stationList);
@@ -137,7 +139,32 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.
             favBtn = itemView.findViewById(R.id.favBtn);
             navBtn = itemView.findViewById(R.id.nav_btn);
 
+            //navigate to station
+            navBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context.getApplicationContext(), "Navigation button clicked",Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:q=50.28320237351197, 18.663372454611217&mode=1"));
+//                    intent.setPackage("com.google.android.apps.maps");
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    context.startActivity(intent);
 
+                    StationModel.GeoCoordinates coordinates = stationList.get(getAdapterPosition()).getGeoCoordinates();
+                    if(coordinates != null){
+                        String geoUri = "google.navigation:q=" + coordinates.getLatitude() + "," + coordinates.getLongitude() + "&mode=1";
+
+                        Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(geoUri));
+                        intent.setPackage("com.google.android.apps.maps");
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
+                    }else {
+                        Toast.makeText(context,"Coordinates not found",Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
+
+            //add to favourite
             favBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

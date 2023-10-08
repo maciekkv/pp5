@@ -18,9 +18,11 @@ public class StationModel   {
     String ON;
     String icon;
     boolean isFavourite;
+    String geo;
+    int id;
 
     //constructor
-    public StationModel(String address, String LPG, String PB95, String PB98, String ON, String icon) {
+    public StationModel(String address, String LPG, String PB95, String PB98, String ON, String icon, String geo, int id) {
         this.address = address;
         this.LPG = LPG;
         this.PB95 = PB95;
@@ -28,10 +30,9 @@ public class StationModel   {
         this.ON = ON;
         this.icon = icon;
         this.isFavourite = false;
+        this.geo = geo;
+        this.id = id;
     }
-
-
-
 
 
     public StationModel() {
@@ -63,7 +64,11 @@ public class StationModel   {
         return icon;
     }
 
+    public String getGeo() {return geo;}
 
+    public int getId() {
+        return id;
+    }
 
     //sorting
     public static Comparator<StationModel> lpgComparator = new Comparator<StationModel>() {
@@ -104,4 +109,37 @@ public class StationModel   {
         isFavourite = favourite;
     }
 
+
+
+    //coordinates
+    public static class GeoCoordinates {
+        double latitude;
+        double longitude;
+
+        //constructor
+        public GeoCoordinates(double latitude, double longitude) {
+            this.latitude = latitude;
+            this.longitude = longitude;
+        }
+
+        public double getLatitude() {
+            return latitude;
+        }
+
+        public double getLongitude() {
+            return longitude;
+        }
+    }
+    GeoCoordinates geoCoordinates;
+
+
+    //setter
+    public void setGeoCoordinates(double latitude, double longitude) {
+        this.geoCoordinates = new GeoCoordinates(latitude, longitude);
+    }
+
+    //getter
+    public GeoCoordinates getGeoCoordinates() {
+        return geoCoordinates;
+    }
 }
