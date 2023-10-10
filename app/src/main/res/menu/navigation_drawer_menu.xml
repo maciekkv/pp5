@@ -19,11 +19,14 @@
         android:icon="@drawable/ic_baseline_query_stats_24"
         android:title="Statistic"/>
             <item
-        android:id="@+id/nav_button"
-        android:title="Navigation button"
-                android:icon="@drawable/ic_baseline_edit_attributes_24"
-
+        android:id="@+id/nav_button_enable"
+        android:title="Enable Navigation button"
+                android:icon="@drawable/ic_baseline_near_me_24"
                 />
+            <item
+                android:id="@+id/nav_button_disable"
+                android:title="Disable Navigation button"
+                android:icon="@drawable/ic_baseline_near_me_disabled_24"/>
         </menu>
     </item>
     <item android:title="About app">

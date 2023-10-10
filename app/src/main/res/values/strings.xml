@@ -4,4 +4,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="my_map_api_key">AIzaSyCzy-e1gp2kJwRPGvMLALocctfy8VXBC7o</string>
 </resources>

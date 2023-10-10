@@ -29,6 +29,7 @@ import com.example.pp5.R;
 import com.example.pp5.adapters.StationListAdapter;
 import com.example.pp5.models.StationModel;
 import com.example.pp5.viewmodels.StationListViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,7 +46,7 @@ public class HomeFragment extends Fragment {
     StationListAdapter adapter;
     SwipeRefreshLayout swipeRefreshLayout;
 
-    Button button;
+    FloatingActionButton fab;
 
 
     @Override
@@ -111,7 +112,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        //button = view.findViewById(R.id.fab);
+
+
 
 
         return view;
