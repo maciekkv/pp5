@@ -17,6 +17,25 @@
         android:theme="@style/Theme.Pp5"
         tools:targetApi="31">
         <activity
+            android:name=".CityActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".AboutActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".MapsActivity"
             android:exported="false">
             <meta-data
@@ -25,20 +44,17 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCzy-e1gp2kJwRPGvMLALocctfy8VXBC7o"/>
+            android:value="AIzaSyCzy-e1gp2kJwRPGvMLALocctfy8VXBC7o" />
     </application>
 
 </manifest>

@@ -11,6 +11,8 @@ public interface ApiServices {
 
     //make a query, gets objects from endpoint and store them in list
 
-    @GET("Gliwice")         //endpoint
+    @GET("/Gliwice")         //endpoint
+
     Call<List<StationModel>> getStationList();
+
 }

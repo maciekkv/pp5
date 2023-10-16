@@ -45,7 +45,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity   {
+public class MainActivity extends AppCompatActivity  {
 
     BottomNavigationView bottomNav;
     DrawerLayout drawerLayout;
@@ -82,12 +82,12 @@ public class MainActivity extends AppCompatActivity   {
                 switch (item.getItemId()) {
                     case R.id.nav_about:
                         Log.d("About", "About is clicked");
-                        Toast.makeText(getApplicationContext(), "About app", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(MainActivity.this,AboutActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.nav_stats:
                         Log.d("Stats", "Stats is clicked");
-                        //Toast.makeText(MainActivity.this,"Statistic",Toast.LENGTH_LONG).show();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new FavouriteFragment()).commit();
+                        Toast.makeText(MainActivity.this,"Statistic",Toast.LENGTH_LONG).show();
                         break;
                     case R.id.nav_sync:
                         Log.d("Sync", "Sync is clicked");
@@ -95,17 +95,16 @@ public class MainActivity extends AppCompatActivity   {
                         break;
                     case R.id.nav_button_enable:
                         Log.d("Button", "Navigation button is enabled");
-                        Toast.makeText(getApplicationContext(), "Navigation button is enabled", Toast.LENGTH_SHORT).show();
                         fab.setVisibility(View.VISIBLE);
                         break;
                     case R.id.nav_button_disable:
                         Log.d("Button", "Navigation button is disabled");
-                        Toast.makeText(getApplicationContext(), "Navigation button is disabled", Toast.LENGTH_SHORT).show();
                         fab.setVisibility(View.GONE);
                         break;
                     case R.id.main:
                         Log.d("Main", "Main is clicked");
-                        Toast.makeText(getApplicationContext(), "Main Home", Toast.LENGTH_SHORT).show();
+                        Intent intent2 = new Intent(MainActivity.this,CityActivity.class);
+                        startActivity(intent2);
                         break;
                     default:
                         return true;
