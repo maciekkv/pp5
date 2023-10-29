@@ -144,10 +144,6 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(context.getApplicationContext(), "Navigation button clicked",Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:q=50.28320237351197, 18.663372454611217&mode=1"));
-//                    intent.setPackage("com.google.android.apps.maps");
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    context.startActivity(intent);
 
                     StationModel.GeoCoordinates coordinates = stationList.get(getAdapterPosition()).getGeoCoordinates();
                     if(coordinates != null){
@@ -211,6 +207,7 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.
         }
         return favouriteStations;
     }
+
 
 
 }

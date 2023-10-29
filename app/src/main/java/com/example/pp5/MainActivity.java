@@ -7,14 +7,17 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,9 +29,12 @@ import android.widget.SearchView;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.example.pp5.apis.ApiServices;
 import com.example.pp5.fragments.FavouriteFragment;
 import com.example.pp5.fragments.HomeFragment;
 import com.example.pp5.fragments.SearchFragment;
+import com.example.pp5.repositories.StationRepository;
+import com.example.pp5.viewmodels.StationListViewModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -61,6 +67,9 @@ public class MainActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_main);
 
 
+        String currentCity = StationRepository.getCurrentCity();
+        ApiServices apiServices = StationRepository.getRetrofitClient().create(ApiServices.class);
+
         drawerLayout = findViewById(R.id.drawerLayout);
 
         //to display system toolbar
@@ -90,8 +99,8 @@ public class MainActivity extends AppCompatActivity  {
                         Toast.makeText(MainActivity.this,"Statistic",Toast.LENGTH_LONG).show();
                         break;
                     case R.id.nav_sync:
+                        restart();
                         Log.d("Sync", "Sync is clicked");
-                        Toast.makeText(getApplicationContext(), "Sync up to date", Toast.LENGTH_LONG).show();
                         break;
                     case R.id.nav_button_enable:
                         Log.d("Button", "Navigation button is enabled");
@@ -133,17 +142,18 @@ public class MainActivity extends AppCompatActivity  {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new HomeFragment()).commit();
     }
+    private void restart(){
+        Intent intent1 = getIntent();
+        finish();
+        startActivity(intent1);
+        new Handler().postDelayed(new Runnable() {
 
-
-    private void navigateToClosetStation() {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:q=50.28701587657711, 18.672802131331053&mode=1"));
-        intent.setPackage("com.google.android.apps.maps");
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+            @Override
+            public void run() {
+                Toast.makeText(MainActivity.this, "All prices are up to date", Toast.LENGTH_SHORT).show();
+            }
+        }, 750);
     }
-
-
-
 
 
 
@@ -158,7 +168,7 @@ public class MainActivity extends AppCompatActivity  {
                     selectedFragment = new HomeFragment();
                     break;
                 case R.id.search:
-                    Log.d("SearchFragment", "Searcg Fragment is on");
+                    Log.d("SearchFragment", "Search Fragment is on");
                     selectedFragment = new SearchFragment();
                     break;
                 case R.id.favourite:
@@ -181,6 +191,7 @@ public class MainActivity extends AppCompatActivity  {
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 
 

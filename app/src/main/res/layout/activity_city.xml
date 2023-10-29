@@ -85,6 +85,7 @@
         android:layout_marginBottom="68dp"
         android:background="@drawable/round_button"
         android:gravity="center"
+        android:textColor="@color/white"
         android:text="GO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

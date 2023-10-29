@@ -1,9 +1,11 @@
 package com.example.pp5;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,6 +13,9 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.pp5.repositories.StationRepository;
+import com.example.pp5.viewmodels.StationListViewModel;
 
 public class CityActivity extends AppCompatActivity {
 
@@ -53,6 +58,16 @@ public class CityActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String selectedCity = spinner.getSelectedItem().toString();
+                StationRepository.setCurrentCity(selectedCity);
+                //StationRepository.updateBaseUrl();
+                Log.d("CityActivity", "Selected city: " + StationRepository.getCurrentCity());
+
+                StationListViewModel stationListViewModel = new ViewModelProvider(CityActivity.this).get(StationListViewModel.class);
+                stationListViewModel.setCurrentCity(selectedCity);
+                stationListViewModel.makeApiCall();
+
+
                 Intent intent = new Intent(CityActivity.this,MainActivity.class);
                 startActivity(intent);
             }

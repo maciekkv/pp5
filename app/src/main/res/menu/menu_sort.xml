@@ -5,13 +5,39 @@
     <item android:id="@+id/SortBy"
         android:title="Sort by"
         app:showAsAction="ifRoom"/>
-    <item android:id="@+id/lpg_sort"
-        android:title="LPG" />
-    <item android:id="@+id/pb95_sort"
-        android:title="PB 95"/>
-    <item android:id="@+id/pb98_sort"
-        android:title="PB 98"/>
-    <item android:id="@+id/on_sort"
-        android:title="ON"/>
+
+    <item android:id="@+id/option1"
+        android:title="Fuel"
+        app:showAsAction="never">
+        <menu>
+            <item android:id="@+id/lpg_sort"
+                android:title="LPG" />
+            <item android:id="@+id/pb95_sort"
+                android:title="PB 95"/>
+            <item android:id="@+id/pb98_sort"
+                android:title="PB 98"/>
+            <item android:id="@+id/on_sort"
+                android:title="ON"/>
+        </menu>
+    </item>
+
+    <item android:id="@+id/option2"
+        android:title="Company"
+        app:showAsAction="never">
+        <menu>
+            <item android:id="@+id/orlen_sort"
+                android:title="Orlen" />
+            <item android:id="@+id/bp_sort"
+                android:title="Bp"/>
+            <item android:id="@+id/shell_sort"
+                android:title="Shell"/>
+            <item android:id="@+id/amic_sort"
+                android:title="Amic"/>
+            <item android:id="@+id/circle_sort"
+                android:title="Circle K Express"/>
+            <item android:id="@+id/moya_sort"
+                android:title="Moya"/>
+        </menu>
+    </item>
 
 </menu>

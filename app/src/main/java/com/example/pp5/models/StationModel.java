@@ -5,7 +5,9 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 public class StationModel   {
     //model class - select data which should be fetched from api
@@ -20,9 +22,10 @@ public class StationModel   {
     boolean isFavourite;
     String geo;
     int id;
+    String name;
 
     //constructor
-    public StationModel(String address, String LPG, String PB95, String PB98, String ON, String icon, String geo, int id) {
+    public StationModel(String address, String LPG, String PB95, String PB98, String ON, String icon, String geo, int id, String name) {
         this.address = address;
         this.LPG = LPG;
         this.PB95 = PB95;
@@ -32,6 +35,7 @@ public class StationModel   {
         this.isFavourite = false;
         this.geo = geo;
         this.id = id;
+        this.name = name;
     }
 
 
@@ -70,6 +74,8 @@ public class StationModel   {
         return id;
     }
 
+    public String getName() { return name; }
+
     //sorting
     public static Comparator<StationModel> lpgComparator = new Comparator<StationModel>() {
         @Override
@@ -99,6 +105,27 @@ public class StationModel   {
         }
     };
 
+
+    public static Comparator<StationModel> nameComparator(String selectedBrand) {
+        return new Comparator<StationModel>() {
+            @Override
+            public int compare(StationModel o1, StationModel o2) {
+                // Check, if stations starts with same brand
+                boolean isBrand1 = o1.getName().startsWith(selectedBrand);
+                boolean isBrand2 = o2.getName().startsWith(selectedBrand);
+
+                // Set the position for station, first with selected brand,then with other
+                if (isBrand1 && !isBrand2) {
+                    return -1;
+                } else if (!isBrand1 && isBrand2) {
+                    return 1;
+                } else {
+                    // if both are the same or none of them, rest sort alphabetically
+                    return o1.getName().compareTo(o2.getName());
+                }
+            }
+        };
+    }
 
     public boolean isFavourite() {
         return isFavourite;

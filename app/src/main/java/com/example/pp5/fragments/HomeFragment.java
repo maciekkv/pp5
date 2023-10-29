@@ -65,8 +65,10 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(List<StationModel> stationModels) {
                 if(stationModels!=null){
+                    Log.d("HomeFragment", "Station list size: " + stationModels.size());
                     stationList = stationModels;
                     adapter.updateStationList(stationModels);
+                    adapter.notifyDataSetChanged();
                     noresult.setVisibility(View.GONE);
                     progressBar.setVisibility(View.GONE);
                 }
@@ -164,6 +166,43 @@ public class HomeFragment extends Fragment {
                 Log.d("OnSort", "On Sort selected");
                 Toast.makeText(getContext(),"Sorted by ON",Toast.LENGTH_SHORT).show();
                 Collections.sort(stationList, StationModel.onComparator);
+                adapter.notifyDataSetChanged();
+                break;
+            case R.id.orlen_sort:
+                Log.d("OrlenSort", "Orlen Sort selected");
+                Toast.makeText(getContext(),"Sorted by Orlen",Toast.LENGTH_SHORT).show();
+                Collections.sort(stationList, StationModel.nameComparator("ORLEN"));
+                adapter.notifyDataSetChanged();
+                break;
+            case R.id.bp_sort:
+                Log.d("BPSort", "BP Sort selected");
+                Toast.makeText(getContext(),"Sorted by BP",Toast.LENGTH_SHORT).show();
+                Collections.sort(stationList, StationModel.nameComparator("BP"));
+
+                adapter.notifyDataSetChanged();
+                break;
+            case R.id.shell_sort:
+                Log.d("ShellSort", "Shell Sort selected");
+                Toast.makeText(getContext(),"Sorted by Shell",Toast.LENGTH_SHORT).show();
+                Collections.sort(stationList, StationModel.nameComparator("SHELL"));
+                adapter.notifyDataSetChanged();
+                break;
+            case R.id.amic_sort:
+                Log.d("AmicSort", "Amic Sort selected");
+                Toast.makeText(getContext(),"Sorted by Amic",Toast.LENGTH_SHORT).show();
+                Collections.sort(stationList, StationModel.nameComparator("AMIC"));
+                adapter.notifyDataSetChanged();
+                break;
+            case R.id.circle_sort:
+                Log.d("CircleSort", "Circle Sort selected");
+                Toast.makeText(getContext(),"Sorted by Circle",Toast.LENGTH_SHORT).show();
+                Collections.sort(stationList, StationModel.nameComparator("CIRCLE K EXPRESS"));
+                adapter.notifyDataSetChanged();
+                break;
+            case R.id.moya_sort:
+                Log.d("MoyaSort", "Moya Sort selected");
+                Toast.makeText(getContext(),"Sorted by Moya",Toast.LENGTH_SHORT).show();
+                Collections.sort(stationList, StationModel.nameComparator("MOYA"));
                 adapter.notifyDataSetChanged();
                 break;
         }
