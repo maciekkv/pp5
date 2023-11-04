@@ -5,11 +5,12 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-public class StationModel   {
+public class StationModel  {
     //model class - select data which should be fetched from api
 
     //declare variables
