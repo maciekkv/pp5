@@ -6,9 +6,13 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class StationModel  {
     //model class - select data which should be fetched from api
@@ -24,6 +28,8 @@ public class StationModel  {
     String geo;
     int id;
     String name;
+
+
 
     //constructor
     public StationModel(String address, String LPG, String PB95, String PB98, String ON, String icon, String geo, int id, String name) {
@@ -170,4 +176,7 @@ public class StationModel  {
     public GeoCoordinates getGeoCoordinates() {
         return geoCoordinates;
     }
+
+
 }
+

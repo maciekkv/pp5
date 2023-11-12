@@ -3,6 +3,7 @@ package com.example.pp5.fragments;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +28,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pp5.MainActivity;
 import com.example.pp5.R;
 import com.example.pp5.adapters.FavouriteStationListAdapter;
 import com.example.pp5.adapters.StationListAdapter;
@@ -43,7 +46,7 @@ import java.util.Set;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
-public class FavouriteFragment extends Fragment  {
+public class FavouriteFragment extends Fragment {
 
     RecyclerView recview;
     TextView noresult;

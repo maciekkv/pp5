@@ -19,14 +19,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.pp5.MainActivity;
 import com.example.pp5.R;
+import com.example.pp5.fragments.FavouriteFragment;
 import com.example.pp5.models.StationModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.myViewHolder> implements Filterable{
 
@@ -171,6 +176,7 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.
                     favBtn.setBackgroundResource(R.drawable.ic_baseline_favorite_24_2);
                     Toast.makeText(context,"Added to favourite",Toast.LENGTH_SHORT).show();
                     saveToFavourites(station);
+
                 }
 
             });
@@ -178,10 +184,12 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.
         }
 
 
+
     }
 
     //save station to favourite
     private void saveToFavourites(StationModel station){
+
         SharedPreferences sharedPreferences = context.getSharedPreferences("shared preferences",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
@@ -189,6 +197,7 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.
         List<StationModel> favouriteStations = getFavouriteStations();
         favouriteStations.add(station);
 
+        //Save to shared preferences
         String json = gson.toJson(favouriteStations);
         editor.putString("station",json);
         editor.apply();
@@ -207,6 +216,7 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.
         }
         return favouriteStations;
     }
+
 
 
 

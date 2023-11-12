@@ -32,27 +32,6 @@ public class StaticticActivity extends AppCompatActivity {
 
         BarChart barChart = findViewById(R.id.barChart);
 
-        /*
-        ArrayList<BarEntry> visitors = new ArrayList<>();
-        visitors.add(new BarEntry(2014,420));
-        visitors.add(new BarEntry(2015,440));
-        visitors.add(new BarEntry(2016,455));
-        visitors.add(new BarEntry(2017,460));
-        visitors.add(new BarEntry(2018,470));
-        visitors.add(new BarEntry(2019,485));
-        visitors.add(new BarEntry(2020,495));
-
-        BarDataSet barDataSet = new BarDataSet(visitors,"Visitors");
-        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-        barDataSet.setValueTextColor(Color.BLACK);
-        barDataSet.setValueTextSize(16f);
-
-        BarData barData = new BarData(barDataSet);
-        barChart.setFitBars(true);
-        barChart.setData(barData);
-        barChart.getDescription().setText("Bar chart");
-        barChart.animateY(2000);
-*/
         List<StationModel> favouriteStations = getFavouriteStations();
 
         ArrayList<BarEntry> entries = new ArrayList<>();
@@ -68,6 +47,7 @@ public class StaticticActivity extends AppCompatActivity {
             labels.add(station.getName()+"\n"+ station.getAddress());
         }
 
+
         BarDataSet barDataSet = new BarDataSet(entries,"PB95 Prices");
         barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
         barDataSet.setValueTextColor(Color.BLACK);
@@ -79,8 +59,8 @@ public class StaticticActivity extends AppCompatActivity {
 
         barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
 
-        barChart.getDescription().setText("PB95 prices for favourite stations");
-        barChart.getDescription().setEnabled(true);
+        //barChart.getDescription().setText("PB95 prices for favourite stations");
+        barChart.getDescription().setEnabled(false);
         barChart.invalidate();
         barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         barChart.getXAxis().setGranularity(1f);
@@ -100,9 +80,8 @@ public class StaticticActivity extends AppCompatActivity {
         }
         return favouriteStations;
 
-
-
     }
+
 
 
 

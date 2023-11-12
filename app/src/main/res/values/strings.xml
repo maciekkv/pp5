@@ -5,4 +5,18 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="my_map_api_key">AIzaSyCzy-e1gp2kJwRPGvMLALocctfy8VXBC7o</string>
+
+    //title
+    <string name="title1">Select your city</string>
+    <string name="title2">Navigate to the station</string>
+    <string name="title3">Search the station</string>
+    <string name="title4">Add to favourites</string>
+    <string name="title5">Sort by the lowest</string>
+
+    //describtion
+    <string name="desc1">By selecting the city, you can see all available stations</string>
+    <string name="desc2">Simply click on the navigate button to direct you to the station. You can also find the closest station</string>
+    <string name="desc3">Search the station you are looking for. No need to scroll</string>
+    <string name="desc4">Add the station to favourite, if you want to see only desired</string>
+    <string name="desc5">Want to find station with the lowest price? Just sort it</string>
 </resources>
