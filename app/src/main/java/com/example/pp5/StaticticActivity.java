@@ -7,10 +7,14 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pp5.models.StationModel;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -29,10 +33,16 @@ public class StaticticActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statictic);
+        TextView textView;
+        textView = findViewById(R.id.txtViewNoData);
 
         BarChart barChart = findViewById(R.id.barChart);
 
         List<StationModel> favouriteStations = getFavouriteStations();
+
+        if (favouriteStations.isEmpty()) {
+            textView.setVisibility(View.VISIBLE);
+        }
 
         ArrayList<BarEntry> entries = new ArrayList<>();
         ArrayList<String> labels = new ArrayList<>();
@@ -57,15 +67,31 @@ public class StaticticActivity extends AppCompatActivity {
         barChart.setData(barData);
 
 
+
         barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
 
         //barChart.getDescription().setText("PB95 prices for favourite stations");
         barChart.getDescription().setEnabled(false);
-        barChart.invalidate();
+
         barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-        barChart.getXAxis().setGranularity(1f);
+        barChart.getXAxis().setGranularity(1);
         barChart.getXAxis().setGranularityEnabled(true);
-        barChart.animateY(2000);
+
+        barChart.getAxisRight().setDrawLabels(false);
+
+        barChart.setDragEnabled(true);
+        barChart.setVisibleXRangeMaximum(3);
+
+
+        YAxis yAxis = barChart.getAxisLeft();
+        yAxis.setLabelCount(10);
+        //yAxis.setAxisLineColor(Color.BLACK);
+        //yAxis.setAxisLineWidth(2f);
+
+        barChart.animateY(1500);
+
+
+
     }
     private List<StationModel> getFavouriteStations() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);

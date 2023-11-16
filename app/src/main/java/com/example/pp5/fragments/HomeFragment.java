@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,15 +39,13 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     RecyclerView recview;
-    TextView noresult;
+    TextView noresult, txtViewNoConnection,txtViewNoConnection2,txtViewNoConnection3;
     ProgressBar progressBar;
     List<StationModel> stationList;
 
     StationListViewModel listViewModel;
     StationListAdapter adapter;
     SwipeRefreshLayout swipeRefreshLayout;
-
-    FloatingActionButton fab;
 
 
     @Override
@@ -71,11 +70,23 @@ public class HomeFragment extends Fragment {
                     adapter.notifyDataSetChanged();
                     noresult.setVisibility(View.GONE);
                     progressBar.setVisibility(View.GONE);
+                    txtViewNoConnection.setVisibility(View.GONE);
+                    txtViewNoConnection2.setVisibility(View.GONE);
+                    txtViewNoConnection3.setVisibility(View.GONE);
                 }
                 if(stationModels==null){
+                    Log.d("HomeFragment", "No connection");
                     recview.setVisibility(View.GONE);
                     noresult.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.VISIBLE);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            txtViewNoConnection.setVisibility(View.VISIBLE);
+                            txtViewNoConnection2.setVisibility(View.VISIBLE);
+                            txtViewNoConnection3.setVisibility(View.VISIBLE);
+                        }
+                    },2000);
                 }
             }
         });
@@ -97,6 +108,9 @@ public class HomeFragment extends Fragment {
         noresult = view.findViewById(R.id.noresult);
         progressBar = view.findViewById(R.id.progressBar);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
+        txtViewNoConnection = view.findViewById(R.id.txtViewNoConnection);
+        txtViewNoConnection2 = view.findViewById(R.id.txtViewNoConnection2);
+        txtViewNoConnection3 = view.findViewById(R.id.txtViewNoConnection3);
 
         recview.setLayoutManager(new LinearLayoutManager(getContext()));
         recview.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));

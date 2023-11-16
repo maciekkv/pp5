@@ -33,9 +33,7 @@ public class FavouriteStationListAdapter  extends RecyclerView.Adapter<Favourite
 
     List<StationModel> stationListFull;
     List<StationModel> favouriteStations;
-
     Context context;
-
     //constructor
     public FavouriteStationListAdapter(Context context,List<StationModel> stationList) {
         this.context = context;
@@ -167,7 +165,11 @@ public class FavouriteStationListAdapter  extends RecyclerView.Adapter<Favourite
                     notifyItemRemoved(position);
                     Toast.makeText(context, "Removed from favourites", Toast.LENGTH_SHORT).show();
                     saveToFavourites();
-
+                    /*
+                    if(stationList.isEmpty()){
+                        Toast.makeText(context,"List is empty. Add station to favourites",Toast.LENGTH_SHORT).show();
+                    }
+                     */
                 }
             });
 
@@ -207,7 +209,6 @@ public class FavouriteStationListAdapter  extends RecyclerView.Adapter<Favourite
             String json = gson.toJson(favouriteStations);
             editor.putString("station", json);
             editor.apply();
-
         }
 
     }

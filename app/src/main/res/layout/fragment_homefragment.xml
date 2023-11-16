@@ -34,10 +34,10 @@
             android:id="@+id/noresult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
             android:text="Petrol Price"
-            android:textColor="@color/blood"
             android:textSize="24dp"
-            android:textStyle="bold"
+            android:layout_marginBottom="300dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,10 +55,42 @@
             app:layout_constraintVertical_bias="0.126" />
 
 
-
-
-
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtViewNoConnection"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progressBar"
+            android:layout_marginTop="20dp"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:text="Ups..."/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtViewNoConnection2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewNoConnection"
+            android:layout_marginTop="5dp"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:text="Please check your internet connection"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtViewNoConnection3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewNoConnection2"
+            android:layout_marginTop="15dp"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:text="Meanwhile you can check favourites"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

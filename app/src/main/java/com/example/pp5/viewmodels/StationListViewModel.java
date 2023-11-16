@@ -1,11 +1,18 @@
 package com.example.pp5.viewmodels;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.pp5.MainActivity;
+import com.example.pp5.MapsActivity;
+import com.example.pp5.OnboardingActivity;
 import com.example.pp5.apis.ApiServices;
 import com.example.pp5.models.StationModel;
 import com.example.pp5.repositories.StationRepository;
@@ -49,19 +56,20 @@ public class StationListViewModel extends ViewModel {
         call.enqueue(new Callback<List<StationModel>>() {
             @Override
             public void onResponse(Call<List<StationModel>> call, Response<List<StationModel>> response) {
-                //stationList.postValue(response.body());
-                List<StationModel> stations = response.body();
-                if(stations != null){
-                    //update coordinates for each station
-                    for (StationModel station: stations){
-                        String[] geo = station.getGeo().split(", ");
-                        double latitude = Double.parseDouble(geo[0]);
-                        double longitude = Double.parseDouble(geo[1]);
-                        //set coordinates x,y
-                        station.setGeoCoordinates(latitude,longitude);
+                    List<StationModel> stations = response.body();
+                    if (stations != null) {
+                        //update coordinates for each station
+                        for (StationModel station : stations) {
+                            String[] geo = station.getGeo().split(", ");
+                            double latitude = Double.parseDouble(geo[0]);
+                            double longitude = Double.parseDouble(geo[1]);
+                            //set coordinates x,y
+                            station.setGeoCoordinates(latitude, longitude);
+                        }
+                        stationList.postValue(stations);
+
                     }
-                    stationList.postValue(stations);
-                }
+
             }
 
 
@@ -72,8 +80,9 @@ public class StationListViewModel extends ViewModel {
                 Log.e("Error: ",t.getMessage().toString());
             }
         });
+
+
+    }
     }
 
 
-
-}

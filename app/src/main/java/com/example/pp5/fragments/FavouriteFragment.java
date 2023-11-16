@@ -49,7 +49,7 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 public class FavouriteFragment extends Fragment {
 
     RecyclerView recview;
-    TextView noresult;
+    TextView noresult,noFav1,noFav2;
     ProgressBar progressBar;
     List<StationModel> stationList;
     StationListViewModel listViewModel;
@@ -80,6 +80,8 @@ public class FavouriteFragment extends Fragment {
 
         recview = view.findViewById(R.id.recview);
         noresult = view.findViewById(R.id.noresult);
+        noFav1 = view.findViewById(R.id.noFav1);
+        noFav2 = view.findViewById(R.id.noFav2);
 
         recview.setLayoutManager(new LinearLayoutManager(getContext()));
         recview.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
@@ -89,14 +91,8 @@ public class FavouriteFragment extends Fragment {
 
 
 
-
-        if(favouriteStations.isEmpty()){
-            noresult.setVisibility(View.GONE);
-            recview.setVisibility(View.GONE);
-        }else {
-            noresult.setVisibility(View.GONE);
-            recview.setVisibility(View.VISIBLE);
-        }
+        //to check if list is empty
+        updateNoResultVisibility();
 
         adapter.updateStationList(favouriteStations);
         recview.setAdapter(adapter);
@@ -108,6 +104,20 @@ public class FavouriteFragment extends Fragment {
     }
 
 
+    private void updateNoResultVisibility() {
+        if (favouriteStations.isEmpty()) {
+            noresult.setVisibility(View.VISIBLE);
+            recview.setVisibility(View.GONE);
+            noFav1.setVisibility(View.VISIBLE);
+            noFav2.setVisibility(View.VISIBLE);
+        } else {
+            noresult.setVisibility(View.GONE);
+            recview.setVisibility(View.VISIBLE);
+            noFav1.setVisibility(View.GONE);
+            noFav2.setVisibility(View.GONE);
+        }
+    }
+
     ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT) {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -118,6 +128,8 @@ public class FavouriteFragment extends Fragment {
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
             favouriteStations.remove(viewHolder.getAdapterPosition());
+            updateNoResultVisibility();
+
             adapter.notifyDataSetChanged();
             Toast.makeText(getContext(), "Removed from favourites", Toast.LENGTH_SHORT).show();
             saveFavouriteStationsToSharedPreferences();
