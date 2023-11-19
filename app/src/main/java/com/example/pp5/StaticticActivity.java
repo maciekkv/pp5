@@ -19,6 +19,7 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -44,7 +45,10 @@ public class StaticticActivity extends AppCompatActivity {
             textView.setVisibility(View.VISIBLE);
         }
 
-        ArrayList<BarEntry> entries = new ArrayList<>();
+        ArrayList<BarEntry> entriesPB95 = new ArrayList<>();
+        ArrayList<BarEntry> entriesPB98 = new ArrayList<>();
+        ArrayList<BarEntry> entriesON = new ArrayList<>();
+        ArrayList<BarEntry> entriesLPG = new ArrayList<>();
         ArrayList<String> labels = new ArrayList<>();
 
         for(int i=0; i<favouriteStations.size(); i++){
@@ -52,36 +56,72 @@ public class StaticticActivity extends AppCompatActivity {
 
             Log.d("StationData", "Station: " + station.getName()+ " " +  station.getAddress() + " " + station.getPB95());
 
-            float value = Float.parseFloat(station.getPB95());
-            entries.add(new BarEntry(i,value));
-            labels.add(station.getName()+"\n"+ station.getAddress());
+            //float value = Float.parseFloat(station.getPB95());
+            entriesPB95.add(new BarEntry(i, Float.parseFloat(station.getPB95())));
+            entriesPB98.add(new BarEntry(i, Float.parseFloat(station.getPB98())));
+            entriesON.add(new BarEntry(i, Float.parseFloat(station.getON())));
+            entriesLPG.add(new BarEntry(i, Float.parseFloat(station.getLPG())));
+            labels.add(station.getName()+" - "+ station.getAddress());
         }
 
 
-        BarDataSet barDataSet = new BarDataSet(entries,"PB95 Prices");
-        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-        barDataSet.setValueTextColor(Color.BLACK);
-        barDataSet.setValueTextSize(16f);
+        BarDataSet barDataSetPB95 = new BarDataSet(entriesPB95, "PB95");
+        barDataSetPB95.setColors(ColorTemplate.MATERIAL_COLORS[0]);
+        barDataSetPB95.setValueTextColor(Color.BLACK);
+        barDataSetPB95.setValueTextSize(15f);
+        ///
+        BarDataSet barDataSetPB98 = new BarDataSet(entriesPB98, "PB98");
+        barDataSetPB98.setColors(ColorTemplate.MATERIAL_COLORS[1]);
+        barDataSetPB98.setValueTextColor(Color.BLACK);
+        barDataSetPB98.setValueTextSize(15f);
+        ///
+        BarDataSet barDataSetON = new BarDataSet(entriesON, "ON");
+        barDataSetON.setColors(ColorTemplate.MATERIAL_COLORS[2]);
+        barDataSetON.setValueTextColor(Color.BLACK);
+        barDataSetON.setValueTextSize(15f);
+        ///
+        BarDataSet barDataSetLPG = new BarDataSet(entriesLPG, "LPG");
+        barDataSetLPG.setColors(ColorTemplate.MATERIAL_COLORS[3]);
+        barDataSetLPG.setValueTextColor(Color.BLACK);
+        barDataSetLPG.setValueTextSize(15f);
 
-        BarData barData = new BarData(barDataSet);
-        barChart.setData(barData);
+
+
 
 
 
         barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
 
-        //barChart.getDescription().setText("PB95 prices for favourite stations");
+        //barChart.getDescription().setText("Fuel prices visualization");
         barChart.getDescription().setEnabled(false);
 
+        barChart.getAxisRight().setDrawLabels(false);
+        barChart.getXAxis().setCenterAxisLabels(true);
         barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         barChart.getXAxis().setGranularity(1);
         barChart.getXAxis().setGranularityEnabled(true);
 
-        barChart.getAxisRight().setDrawLabels(false);
+
+        float barWidth =0.12f;
+        float barSpace =0.05f;
+        float groupSpace=0.32f;
+
+        BarData barData = new BarData(barDataSetPB95,barDataSetPB98,barDataSetON,barDataSetLPG);
+        barData.setBarWidth(barWidth);
+        barChart.setData(barData);
 
         barChart.setDragEnabled(true);
-        barChart.setVisibleXRangeMaximum(3);
+        barChart.setVisibleXRangeMaximum(2);
 
+        barChart.moveViewToX(0);
+        barChart.setFitBars(true);
+
+        float groupWidth = barData.getGroupWidth(groupSpace, barSpace);
+
+        barChart.getXAxis().setAxisMinimum(0);
+        barChart.getXAxis().setAxisMaximum(0 + groupWidth * favouriteStations.size());
+        barChart.groupBars(0,groupSpace,barSpace);
+        barChart.getAxisLeft().setAxisMinimum(0);
 
         YAxis yAxis = barChart.getAxisLeft();
         yAxis.setLabelCount(10);
@@ -89,6 +129,7 @@ public class StaticticActivity extends AppCompatActivity {
         //yAxis.setAxisLineWidth(2f);
 
         barChart.animateY(1500);
+        barChart.invalidate();
 
 
 
