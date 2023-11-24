@@ -18,7 +18,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.pp5.CityActivity;
+import com.example.pp5.MainActivity;
 import com.example.pp5.R;
+import com.example.pp5.fragments.FavouriteFragment;
 import com.example.pp5.models.StationModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -165,11 +168,16 @@ public class FavouriteStationListAdapter  extends RecyclerView.Adapter<Favourite
                     notifyItemRemoved(position);
                     Toast.makeText(context, "Removed from favourites", Toast.LENGTH_SHORT).show();
                     saveToFavourites();
-                    /*
+                    //notifyDataSetChanged();
+
                     if(stationList.isEmpty()){
-                        Toast.makeText(context,"List is empty. Add station to favourites",Toast.LENGTH_SHORT).show();
+                        notifyDataSetChanged();
+                        FavouriteFragment.noresult.setVisibility(View.VISIBLE);
+                        FavouriteFragment.noFav1.setVisibility(View.VISIBLE);
+                        FavouriteFragment.noFav2.setVisibility(View.VISIBLE);
+
                     }
-                     */
+
                 }
             });
 
@@ -227,5 +235,7 @@ public class FavouriteStationListAdapter  extends RecyclerView.Adapter<Favourite
         }
         return favouriteStations;
     }
+
+
 
 }

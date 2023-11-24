@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,34 +15,79 @@
         android:id="@+id/txtView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
         android:gravity="center"
-        android:textColor="@color/black"
         android:text="App developed by driver for drivers"
-        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:textSize="22dp"
+        android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/pic"
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/pic"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:id="@+id/pic"
-        app:layout_constraintTop_toBottomOf="@id/txtView1"
+        android:layout_marginTop="60dp"
+        android:src="@mipmap/ic_launcher"
         app:layout_constraintBottom_toTopOf="@id/txtView2"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@mipmap/ic_launcher"/>
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtView1" />
 
     <TextView
         android:id="@+id/txtView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:text="name: Petrol Price"
         android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/pic"
+
+        />
+
+    <TextView
+        android:id="@+id/txtView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="version: 1.0"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/txtView2"
+
+        />
+
+    <TextView
+        android:id="@+id/txtView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="Android version required to run: 9"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/txtView3"
+
+        />
+
+    <TextView
+        android:id="@+id/txtView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="author: Maciej Cieslinski"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/txtView4"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="Maciej Cieslinski"
-        tools:layout_editor_absoluteX="202dp"
-        tools:layout_editor_absoluteY="343dp" />
+        />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

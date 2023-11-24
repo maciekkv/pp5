@@ -91,6 +91,18 @@
             android:textColor="@color/black"
             android:textSize="18dp"
             android:text="Meanwhile you can check favourites"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtViewNoConnection4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewNoConnection3"
+            android:layout_marginTop="15dp"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:text="Ups...Looks like there is server issue"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -5,32 +5,59 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/bezowy"
     android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bezowy"
+    android:orientation="vertical"
+    android:paddingBottom="20dp"
+    >
 
     <ImageView
         android:id="@+id/onboardingImg"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_gravity="center"
-        android:src="@drawable/onboarding1"/>
+        android:layout_marginTop="4dp"
+        android:src="@drawable/onboarding1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/txtView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:fontFamily="sans-serif-black"
         android:text="@string/title1"
         android:textAlignment="center"
-        android:fontFamily="sans-serif-black"
-        android:textSize="32dp"/>
+        android:textSize="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/onboardingImg"
+        app:layout_constraintVertical_bias="0.0" />
+
     <TextView
         android:id="@+id/txtView2"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp"
+        android:fontFamily="sans-serif"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
         android:text="@string/desc1"
         android:textAlignment="center"
-        android:fontFamily="sans-serif"
-        android:textSize="20dp"/>
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/txtView1" />
 
+</androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </LinearLayout>

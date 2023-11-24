@@ -40,6 +40,7 @@ public class HomeFragment extends Fragment {
 
     RecyclerView recview;
     TextView noresult, txtViewNoConnection,txtViewNoConnection2,txtViewNoConnection3;
+    public static TextView txtViewNoConnection4;
     ProgressBar progressBar;
     List<StationModel> stationList;
 
@@ -110,6 +111,8 @@ public class HomeFragment extends Fragment {
         txtViewNoConnection = view.findViewById(R.id.txtViewNoConnection);
         txtViewNoConnection2 = view.findViewById(R.id.txtViewNoConnection2);
         txtViewNoConnection3 = view.findViewById(R.id.txtViewNoConnection3);
+        txtViewNoConnection4 = view.findViewById(R.id.txtViewNoConnection4);
+
 
         recview.setLayoutManager(new LinearLayoutManager(getContext()));
         recview.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));

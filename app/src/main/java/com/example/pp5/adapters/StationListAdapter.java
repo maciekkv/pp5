@@ -36,9 +36,10 @@ import java.util.Locale;
 public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.myViewHolder> implements Filterable{
 
     List<StationModel> stationList;
-
     List<StationModel> stationListFull;
     Context context;
+    Button favBtn;
+
 
 
 
@@ -129,7 +130,7 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.
         TextView txt3;
         TextView txt4;
         TextView txt5;
-        Button favBtn;
+        //Button favBtn;
         Button navBtn;
 
 
@@ -173,8 +174,10 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.
                     StationModel station = stationList.get(position);
 
                     station.setFavourite(true);
-                    favBtn.setBackgroundResource(R.drawable.ic_baseline_favorite_24_2);
-                    Toast.makeText(context,"Added to favourite",Toast.LENGTH_SHORT).show();
+
+
+                    //favBtn.setBackgroundResource(R.drawable.ic_baseline_favorite_24_2);
+                    //Toast.makeText(context,"Added to favourite",Toast.LENGTH_SHORT).show();
                     saveToFavourites(station);
 
                 }
@@ -195,12 +198,28 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.
         Gson gson = new Gson();
 
         List<StationModel> favouriteStations = getFavouriteStations();
-        favouriteStations.add(station);
 
-        //Save to shared preferences
-        String json = gson.toJson(favouriteStations);
-        editor.putString("station",json);
-        editor.apply();
+        // if station is already favourite
+        boolean isAlreadyFavourite = false;
+        for (StationModel favStation : favouriteStations) {
+            if (favStation.getAddress().equals(station.getAddress())) {
+                isAlreadyFavourite = true;
+                break;
+            }
+        }
+
+
+        if (!isAlreadyFavourite) {
+            favouriteStations.add(station);
+            Toast.makeText(context, "Added to favourites", Toast.LENGTH_SHORT).show();
+            //favBtn.setBackgroundResource(R.drawable.ic_baseline_favorite_24_2);
+            //Save to shared preferences
+            String json = gson.toJson(favouriteStations);
+            editor.putString("station", json);
+            editor.apply();
+        } else {
+            Toast.makeText(context, "Station is already in favourites.\nDon't duplicate", Toast.LENGTH_SHORT).show();
+        }
     }
 
     //list to store favourite stations

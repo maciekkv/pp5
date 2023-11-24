@@ -2,9 +2,12 @@ package com.example.pp5.viewmodels;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
@@ -14,6 +17,7 @@ import com.example.pp5.MainActivity;
 import com.example.pp5.MapsActivity;
 import com.example.pp5.OnboardingActivity;
 import com.example.pp5.apis.ApiServices;
+import com.example.pp5.fragments.HomeFragment;
 import com.example.pp5.models.StationModel;
 import com.example.pp5.repositories.StationRepository;
 
@@ -46,7 +50,6 @@ public class StationListViewModel extends ViewModel {
     }
 
 
-
     //make the connection
     public void makeApiCall(){
         updateBaseUrl();
@@ -56,6 +59,9 @@ public class StationListViewModel extends ViewModel {
         call.enqueue(new Callback<List<StationModel>>() {
             @Override
             public void onResponse(Call<List<StationModel>> call, Response<List<StationModel>> response) {
+                if(response.isSuccessful()) {
+                    Log.d("Success: ", "Successful response. Code: " + response.code());
+
                     List<StationModel> stations = response.body();
                     if (stations != null) {
                         //update coordinates for each station
@@ -68,7 +74,13 @@ public class StationListViewModel extends ViewModel {
                         }
                         stationList.postValue(stations);
 
+                    } else {
+                        Log.e("Error: ", "No records");
                     }
+                }else {
+                    Log.e("Error: ", "Unsuccessful response. Code: " + response.code());
+                    HomeFragment.txtViewNoConnection4.setVisibility(View.VISIBLE);
+                }
 
             }
 

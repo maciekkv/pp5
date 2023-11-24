@@ -2,14 +2,12 @@ package com.example.pp5;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.pp5.models.StationModel;
 import com.github.mikephil.charting.charts.BarChart;
@@ -19,7 +17,6 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -33,16 +30,18 @@ public class StaticticActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         setContentView(R.layout.activity_statictic);
         TextView textView;
         textView = findViewById(R.id.txtViewNoData);
-
         BarChart barChart = findViewById(R.id.barChart);
 
         List<StationModel> favouriteStations = getFavouriteStations();
 
         if (favouriteStations.isEmpty()) {
             textView.setVisibility(View.VISIBLE);
+            barChart.setVisibility(View.GONE);
         }
 
         ArrayList<BarEntry> entriesPB95 = new ArrayList<>();
@@ -63,6 +62,7 @@ public class StaticticActivity extends AppCompatActivity {
             entriesLPG.add(new BarEntry(i, Float.parseFloat(station.getLPG())));
             labels.add(station.getName()+" - "+ station.getAddress());
         }
+
 
 
         BarDataSet barDataSetPB95 = new BarDataSet(entriesPB95, "PB95");
@@ -132,8 +132,20 @@ public class StaticticActivity extends AppCompatActivity {
         barChart.invalidate();
 
 
-
     }
+
+
+    @Override
+    public void onBackPressed() {
+        Log.d("StaticticActivity", "onSupportNavigateUp() called");
+        super.onBackPressed();
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
+
     private List<StationModel> getFavouriteStations() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
@@ -148,8 +160,6 @@ public class StaticticActivity extends AppCompatActivity {
         return favouriteStations;
 
     }
-
-
 
 
 }

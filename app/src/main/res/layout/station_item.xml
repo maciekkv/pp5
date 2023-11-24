@@ -96,7 +96,6 @@
 
         <ToggleButton
             android:id="@+id/favBtn"
-            android:onClick="onDefaultToggleClick"
             android:layout_width="38dp"
             android:textOn=""
             android:textOff=""

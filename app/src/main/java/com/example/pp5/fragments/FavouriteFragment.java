@@ -49,15 +49,11 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 public class FavouriteFragment extends Fragment {
 
     RecyclerView recview;
-    TextView noresult,noFav1,noFav2;
-    ProgressBar progressBar;
+    public static TextView noresult,noFav1,noFav2;
     List<StationModel> stationList;
     StationListViewModel listViewModel;
-    //StationListAdapter adapter;
     FavouriteStationListAdapter adapter;
-    SwipeRefreshLayout swipeRefreshLayout;
     List<StationModel> favouriteStations;
-    ItemTouchHelper itemTouchHelper;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
